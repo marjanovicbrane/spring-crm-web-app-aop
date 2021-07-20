@@ -37,4 +37,21 @@ public class CRMLoggingAspect {
 		}
 	}
 	
+	
+		//We are using @AfterReturning ADVICE TYPE.
+		//returning="result" is return value (object) of the method.
+		@AfterReturning(
+				pointcut="com.brane.spring.aspect.AopExpressions.forAppFlow()",
+				returning="result")
+		public void afterReturning(JoinPoint joinpoint, Object result) {
+			
+			//We are going to show method which we are calling.
+			String metod=joinpoint.getSignature().toShortString();
+			mylogger.info("=====>Nalazimo se u savjetu @AfterReturning ,a pozivani metod je : "+metod);
+			
+			//We are going to show return value (objects) of the calling method.
+			mylogger.info("=====>Result is : "+result);
+			
+		}
+	
 }
